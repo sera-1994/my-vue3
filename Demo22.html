@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Demo22</title>
+    <script src="https://unpkg.com/vue@next"></script>
+  </head>
+  <body>
+    <div id="app"></div>
+  </body>
+  <script>
+    const app = Vue.createApp({
+      data() {
+        return {
+          lesson: "计算机概论",
+          chose: true,
+          girls: [],
+          girl: "",
+          text: "这是一段很长很长的文字",
+        };
+      },
+      methods: {},
+      template: `
+        <div>{{lesson}}<input type="text" v-model="lesson"/></div>
+        <div>{{chose}}<input type="checkbox" v-model="chose"/></div>
+        <div>
+          {{girls}}
+          青下<input type="checkbox" v-model="girls" value="青下" />
+          蓝上<input type="checkbox" v-model="girls" value="蓝上" />
+          紫下<input type="checkbox" v-model="girls" value="紫下" />
+        </div>
+        <div>
+          {{girl}}
+          青下<input type="radio" v-model="girl" value="青下" />
+          蓝上<input type="radio" v-model="girl" value="蓝上" />
+          紫下<input type="radio" v-model="girl" value="紫下" />
+        </div>
+        <div>
+          {{text}}
+          <textarea v-model="text"/>
+        </div>
+        `,
+    });
+    const vm = app.mount("#app");
+  </script>
+</html>

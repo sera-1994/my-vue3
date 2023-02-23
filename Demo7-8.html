@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://unpkg.com/vue@next"></script>
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="app"></div>
+    <script>
+      const app = Vue.createApp({
+        data: {
+          message: "sera",
+        },
+        methods: {
+          handleClick() {
+            console.log("你点了按钮");
+            this.message =
+              this.message == "jspang.com" ? "技术胖" : "jspang.com";
+            console.log(this.message);
+          },
+        },
+        beforeCreate() {
+          console.log("beforeCreate");
+        },
+        created() {
+          console.log("created");
+        },
+        beforeMount() {
+          console.log("beforeMount");
+        },
+        mounted() {
+          console.log("mounted");
+        },
+        beforeUpdate() {
+          console.log("update");
+        },
+        updated() {
+          console.log(updated);
+        },
+        beforeUnmount() {
+          console.log("beforeUnmount");
+        },
+        unmounted() {
+          console.log("unmounted");
+        },
+        template: `<div>
+                <h1>title</h1>
+                <div><button v-on:click="handleClick">click me</button></div>
+                </div>`,
+      });
+      app.mount("#app");
+    </script>
+  </body>
+</html>

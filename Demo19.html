@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Demo19</title>
+    <script src="https://unpkg.com/vue@next"></script>
+  </head>
+  <body>
+    <div id="app"></div>
+  </body>
+  <script>
+    const app = Vue.createApp({
+      data() {
+        return {
+          count: 0,
+          price: 10,
+        };
+      },
+      methods: {
+        handleAdd(num, event) {
+          alert(1);
+        },
+        handleClick() {
+          alert("2");
+        },
+      },
+      template: `
+      <div @click.capture="handleClick()">
+        哈哈 你可以点击试试
+        <div>目前已点数量{{count}}.</div>
+        <div>目前价格{{price}}.</div>
+        <button @click="handleAdd(2,$event)">增加一位甜筒</button>
+      </div>
+      `,
+    });
+    const vm = app.mount("#app");
+  </script>
+</html>

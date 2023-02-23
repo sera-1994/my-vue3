@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://unpkg.com/vue@next"></script>
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="app"></div>
+    <script>
+      const app = Vue.createApp({
+        data() {
+          return {
+            list: ["春花", "夏虫", "秋月", "冬青"],
+            inputMode: "",
+          };
+        },
+        methods: {
+          add() {
+            this.list.push(this.inputMode);
+          },
+        },
+        template: `
+      <div>
+        <my-title />
+        <input v-model="inputMode" />
+        <button v-on:click="add">增加</button>
+        <ul>
+          <my-list-item
+            v-for="(item, index) in list"
+            v-bind:index="index"
+            v-bind:item="item"
+          />
+        </ul>
+      </div>`,
+      });
+      app.component("my-title", {
+        template: `<h1>Demo 5 子组件</h1>`,
+      });
+      app.component("my-list-item", {
+        props: ["index", "item"],
+        template: `<li>{{[index]}}{{item}}</li>`,
+      });
+      app.mount("#app");
+    </script>
+  </body>
+</html>

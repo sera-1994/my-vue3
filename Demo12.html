@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://unpkg.com/vue@next"></script>
+    <title>三元运算符控制模板样式</title>
+  </head>
+  <body>
+    <div id="app"></div>
+  </body>
+  <script>
+    const app = Vue.createApp({
+      data() {
+        return {
+          message: "计算属性",
+          count: 12,
+          price: 20,
+          time: Date.now(),
+        };
+      },
+      methods: {
+        handleClick() {
+          this.count++;
+        },
+        handleChange() {
+          this.message = this.message == "hello" ? "计算属性" : "hello";
+        },
+        getTime() {
+          return Date.now();
+        },
+      },
+      computed: {
+        total() {
+          return this.price * this.count;
+        },
+        date() {
+          return Date.now();
+        },
+      },
+      template: `
+      <div>
+        <h2>{{message}}</h2>
+        <h2>{{getTime()}}</h2>
+        <h2>{{date}}</h2>
+        <h2  class="one">{{total}}</h2>
+        <button @click="handleClick">增加</button>
+        <button @click="handleChange">改变</button>
+      </div>
+     `,
+    });
+    app.mount("#app");
+  </script>
+  <style>
+    .one {
+      color: hotpink;
+    }
+    .two {
+      color: blanchedalmond;
+    }
+    .three {
+      color: greenyellow;
+    }
+  </style>
+</html>

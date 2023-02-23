@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://unpkg.com/vue@next"></script>
+    <title>Demo14</title>
+  </head>
+  <body>
+    <div id="app"></div>
+  </body>
+  <script>
+    const app = Vue.createApp({
+      data() {
+        return {
+          classString: "red",
+          classObject: {
+            red: true,
+            green: true,
+            background: true,
+          },
+          style: {
+            background: "yellow",
+            color: "green",
+            "font-size": "24px",
+          },
+          styleString: "color: pink; font-size: 44px",
+          classArray: ["red", "green", { background: true }],
+        };
+      },
+      template: `
+      <div>
+        <h2 :class="classArray">数量</h2>
+        <h2 :style="style">Vue模板样式</h2>
+        <sonCom :class="classArray"/>
+      </div>
+     `,
+    });
+    app.component("sonCom", {
+      template: `<div><div>子组件</div><div>son component</div></div>`,
+    });
+    app.mount("#app");
+  </script>
+  <style>
+    .red {
+      color: hotpink !important;
+    }
+    .green {
+      font-size: 26px;
+      color: green;
+    }
+    .background {
+      background-color: rgb(254, 222, 199);
+    }
+  </style>
+</html>

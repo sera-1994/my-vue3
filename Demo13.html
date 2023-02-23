@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://unpkg.com/vue@next"></script>
+    <title>Demo13</title>
+  </head>
+  <body>
+    <div id="app"></div>
+  </body>
+  <script>
+    const app = Vue.createApp({
+      data() {
+        return {
+          message: "计算属性",
+          count: 12,
+          price: 20,
+          newTotal: 240,
+        };
+      },
+      methods: {
+        handleClick() {
+          this.count++;
+        },
+        handleChange() {
+          this.message = this.message == "hello" ? "计算属性" : "hello";
+        },
+        getTime() {
+          return Date.now();
+        },
+      },
+      watch: {
+        count(current, prev) {
+          console.log("count changed");
+          console.log("current", current);
+          console.log("prev", prev);
+          this.newTotal = this.count * this.price;
+        },
+      },
+      computed: {
+        total() {
+          return this.price * this.count;
+        },
+        date() {
+          return Date.now();
+        },
+      },
+      template: `
+      <div>
+        <h2>数量：{{count}}</h2>
+        <h2>价格：{{price}}</h2>
+        <h2>{{message}}</h2>
+        <h2>{{newTotal}}</h2>
+        <h2>{{getTime()}}</h2>
+        <h2>{{date}}</h2>
+        <h2  class="one">{{total}}</h2>
+        <button @click="handleClick">增加</button>
+        <button @click="handleChange">改变</button>
+      </div>
+     `,
+    });
+    app.mount("#app");
+  </script>
+  <style>
+    .one {
+      color: hotpink;
+    }
+    .two {
+      color: blanchedalmond;
+    }
+    .three {
+      color: greenyellow;
+    }
+  </style>
+</html>

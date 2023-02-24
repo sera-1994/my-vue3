@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://cdn.bootcdn.net/ajax/libs/vue/3.2.47/vue.global.js"></script>
+    <title>校验</title>
+  </head>
+  <body>
+    <div id="app"></div>
+  </body>
+  <script>
+    const Hello = {
+      inheritAttrs: true,
+      props: ["num"],
+      emits: {
+        add: (value) => {
+          return value > 20 ? true : false;
+        },
+      },
+      methods: {
+        getInfo() {
+          console.log("ha ha");
+          this.$emit("add", this.num + 3);
+        },
+      },
+      template: `
+      <div>这是一个机会<button @click="getInfo">点一点哦</button></div>
+      `,
+    };
+
+    const app = Vue.createApp({
+      components: {
+        Hello,
+      },
+      data() {
+        return {
+          num: 0,
+        };
+      },
+      methods: {
+        handleAdd(param) {
+          this.num = param;
+        },
+      },
+      template: `<div>{{num}}
+        <Hello :num="num" @add="handleAdd"/>
+        </div>`,
+    });
+    app.mount("#app");
+  </script>
+</html>

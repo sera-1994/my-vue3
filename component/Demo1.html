@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://cdn.bootcdn.net/ajax/libs/vue/3.2.47/vue.global.js"></script>
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="app"></div>
+  </body>
+  <script>
+    const app = Vue.createApp({
+      data() {
+        return {};
+      },
+      methods: {},
+      template: `<div><Skills /><Projects /><counter /><counter /></div>`,
+    });
+    app.component("Skills", {
+      data() {
+        return {
+          lessons: ["js", "css"],
+          newItem: "",
+        };
+      },
+      methods: {
+        addLesson() {
+          this.lessons.push(this.newItem);
+          this.lessons = Array.from(new Set(this.lessons));
+          this.newItem = "";
+        },
+      },
+      template: `<div>
+        <ul><li v-for="(item, index) in lessons" key="item+index">{{item}}</li></ul>
+        <div><input v-model="newItem" @keydown.enter="addLesson"/><button @click="addLesson">提交</button></div>
+        </div>`,
+    });
+    app.component("Projects", {
+      data() {
+        return {
+          products: ["机器人", "红外", "文献"],
+          newItem: "",
+        };
+      },
+      methods: {
+        addProduct() {
+          this.products.push(this.newItem);
+          this.products = Array.from(new Set(this.products));
+          this.newItem = "";
+        },
+      },
+      template: `
+      <div>
+        <ul><li v-for="(item, index) in products" key="item+index">{{item}}</li></ul>
+        <div><input v-model="newItem" @keydown.enter="addProduct"/><button @click="addProduct">提交</button></div>
+      </div>`,
+    });
+    app.component("counter", {
+      data() {
+        return {
+          num: 0,
+        };
+      },
+      methods: {
+        add() {
+          this.num++;
+        },
+      },
+      template: `<div>{{num}}<button @click="add">再来一个</button></div>`,
+    });
+    app.mount("#app");
+  </script>
+</html>

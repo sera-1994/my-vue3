@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://cdn.bootcdn.net/ajax/libs/vue/3.2.47/vue.global.js"></script>
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="app"></div>
+    <script>
+      const app = Vue.createApp({
+        template: `
+        <div>
+          <personal-introduce v-slot="props">
+            <div>{{props.item}}</div>
+          </personal-introduce>
+        </div>
+        `,
+      });
+
+      app.component("PersonalIntroduce", {
+        data() {
+          return {
+            projects: ["用户飞机服务管理", "佛山", "清远"],
+          };
+        },
+        template: `<div>
+          哈哈
+          <slot v-for="item in projects" :item=item />
+          </div>`,
+      });
+
+      app.mount("#app");
+    </script>
+  </body>
+</html>

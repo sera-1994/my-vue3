@@ -176,3 +176,17 @@ prop， 所有的 prop 都使得其父子 prop 之间形成了一个单向下行
       </div>`,
   });
 ```
+
+### 8. 插槽
+
+`<slot></slot>` 感觉类似 React 中的{{children}}
+父组件使用子组件 可以写 组件、dom 元素、动态数据，子组件使用插槽接收
+<slot></slot> 中的内容是默认值，如果父组件中没有写，则展示默认内容
+
+### 9. 具名插槽使用
+
+父组件中使用`<template v-slot:one>...</template>` ，子组件中使用<slot name="one"></slot>
+
+具名插槽简写方式 `<template #one></template>`
+
+### 10. 插槽的作用域 作用域插槽

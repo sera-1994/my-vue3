@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://cdn.bootcdn.net/ajax/libs/vue/3.2.47/vue.global.js"></script>
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="app"></div>
+    <script>
+      const app = Vue.createApp({
+        data() {
+          return {
+            skillList: [
+              "JavaScript",
+              "TypeScript",
+              "Html5",
+              "CSS",
+              "React",
+              "SCSS",
+              "LESS",
+            ],
+          };
+        },
+        template: `
+        <div>
+          个人经历
+          <h2>专业</h2>
+          <personal-introduce>
+            <template v-slot:one><div>第一次调用可视化 智慧城市</div></template>
+          </personal-introduce>
+          <h2>技能</h2>
+          <personal-introduce>
+            <template v-slot:one>
+              第二次调用
+            <ul>
+              <li style="color: pink" v-for="item in skillList">{{item}}</li>
+            </ul>
+            </template>
+          </personal-introduce>
+          <personal-introduce>
+            <template v-slot:one><div>第三次调用
+            荣誉111111</div></template>
+            <template v-slot:three><div>333333</div></template>
+          </personal-introduce>
+        </div>
+        `,
+      });
+
+      app.component("PersonalIntroduce", {
+        data() {
+          return {
+            projects: ["用户飞机服务管理", "佛山", "清远"],
+          };
+        },
+        template: `<div>
+          <slot name="one"></slot>
+          <div>这是一些情况....</div>
+          <slot name="three"></slot>
+          </div>`,
+      });
+
+      app.mount("#app");
+    </script>
+  </body>
+</html>

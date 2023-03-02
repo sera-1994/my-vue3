@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://cdn.bootcdn.net/ajax/libs/vue/3.2.47/vue.global.js"></script>
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="app"></div>
+    <script>
+      const app = Vue.createApp({
+        data() {
+          return {
+            current: "program",
+          };
+        },
+        methods: {
+          switchExperience() {
+            this.current = this.current === "program" ? "design" : "program";
+          },
+        },
+        template: `<div>从业经历
+          <keep-alive>
+          <component :is="current"></component>
+          </keep-alive>
+          <button @click="switchExperience">切换</button></div>`,
+      });
+      app.component("program", {
+        template: `<div><h2>软件编程</h2><input /></div>`,
+      });
+      app.component("design", {
+        template: `<div><h2>原型设计</h2></div>`,
+      });
+      app.mount("#app");
+    </script>
+  </body>
+</html>

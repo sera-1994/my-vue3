@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://cdn.bootcdn.net/ajax/libs/vue/3.2.47/vue.global.js"></script>
+    <title>异步组件和Promise传值</title>
+  </head>
+  <body>
+    <div id="app"></div>
+    <script>
+      const app = Vue.createApp({
+        template: `
+        <div>
+          <synchronization-com></synchronization-com>
+          <async-com></async-com>
+        </div>
+        `,
+      });
+      app.component("SynchronizationCom", {
+        template: `
+        <div>这是一个同步组件</div>
+        `,
+      });
+      app.component(
+        "AsyncCom",
+        Vue.defineAsyncComponent(() => {
+          return new Promise((resolve, reject) => {
+            setTimeout(() => {
+              resolve({ template: `<div>这是一个异步组件</div>` });
+            }, 3000);
+          });
+        })
+      );
+      app.mount("#app");
+    </script>
+  </body>
+</html>

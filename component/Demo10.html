@@ -12,26 +12,36 @@
     <script>
       const app = Vue.createApp({
         template: `
-        <div>
-          <personal-introduce v-slot="props">
-            <div>{{props.item}}</div>
-          </personal-introduce>
+        <div id="parent">
+          个人经历
+          <personal-skills v-slot="props"><div class="parent-skill-item">{{props.item}}</div></personal-skills>
         </div>
         `,
       });
-
-      app.component("PersonalIntroduce", {
+      app.component("PersonalSkills", {
         data() {
           return {
-            projects: ["用户飞机服务管理", "佛山", "清远"],
+            skillsList: [
+              "js",
+              "ts",
+              "css",
+              "html",
+              "react",
+              "vue",
+              "material ui",
+              "element ui",
+              "antd",
+              "less",
+              "scss",
+              "sass",
+              "原型设计",
+            ],
           };
         },
-        template: `<div>
-          哈哈
-          <slot v-for="item in projects" :item=item />
-          </div>`,
+        template: `
+        <div id="child"><slot v-for="item in skillsList" :item="item" /></div>
+        `,
       });
-
       app.mount("#app");
     </script>
   </body>

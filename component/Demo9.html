@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://cdn.bootcdn.net/ajax/libs/vue/3.2.47/vue.global.js"></script>
+    <title>具名插槽</title>
+  </head>
+  <body>
+    <div id="app"></div>
+    <script>
+      const app = Vue.createApp({
+        data() {
+          return {};
+        },
+        template: `
+        <div>
+          个人经历
+          <Skills>
+            <template v-slot:one>
+              <span style="color:hotpink">1. 项目经历</span>
+            </template>
+            <template #three>
+              <span>3. 荣誉</span>
+            </template>
+          </Skills>
+          </div>
+        `,
+      });
+      app.component("Skills", {
+        template: `
+        <div>
+          <slot name="one"></slot>
+          <div>2.第二件小事</div>
+          <slot name="three"></slot>
+        </div>
+        `,
+      });
+      app.mount("#app");
+    </script>
+  </body>
+</html>

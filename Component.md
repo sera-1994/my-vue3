@@ -189,4 +189,90 @@ prop， 所有的 prop 都使得其父子 prop 之间形成了一个单向下行
 
 具名插槽简写方式 `<template #one></template>`
 
-### 10. 插槽的作用域 作用域插槽
+### 10. 作用域插槽的使用
+
+子组件中渲染的列表，标签类型由父组件使用的时候决定，可以使用插槽方式。
+
+```
+  <div id="app"></div>
+  <script>
+    const app = Vue.createApp({
+      template: `
+      <div id="parent">
+        个人经历
+        <personal-skills v-slot="props"><div class="parent-skill-item">{{props.item}}</div></personal-skills>
+      </div>
+      `,
+    });
+    app.component("PersonalSkills", {
+      data() {
+        return {
+          skillsList: [
+            "js",
+            "ts",
+            "css",
+            "html",
+            "react",
+            "vue",
+            "material ui",
+            "element ui",
+            "antd",
+            "less",
+            "scss",
+            "sass",
+            "原型设计",
+          ],
+        };
+      },
+      template: `
+      <div id="child"><slot v-for="item in skillsList" :item="item" /></div>
+      `,
+    });
+    app.mount("#app");
+  </script>
+```
+
+### 11. 动态组件和状态保存
+
+动态组件使用`<component :is=""></component>` 标签，is 的值就是子组件的名称；
+
+状态保存可使用`<keep-alive></keep-alive>`标签包裹动态组件标签`<component />` 可实现数据不丢，比如`<input />`标签已经输入的内容，再切换回来还是存在的。
+
+### 12. 异步组件和 Promise 讲解
+
+异步组件的定义
+异步组件的用处：1. 后台请求很多数据的时候使用 2. 大项目拆成很多小的异步组件时使用
+
+```
+  app.component(
+    "AsyncCom",
+    Vue.defineAsyncComponent(() => {
+      return new Promise((resolve, reject) => {
+        setTimeout(() => {
+          resolve({ template: `<div>这是一个异步组件</div>` });
+        }, 3000);
+      });
+    })
+  );
+```
+
+### 13. provide 和 inject 多级组件传值
+
+多级组件中传值，可以用 provide 和 inject 间隔传值
+
+父组件中：
+
+```
+  data(){
+    return {...}
+  },
+  provide: {
+    newHouse: '北京房子一套'
+  },
+```
+
+孙子组件中:
+
+```
+  inject: ['newHouse'],
+```

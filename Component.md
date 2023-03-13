@@ -187,7 +187,7 @@ prop， 所有的 prop 都使得其父子 prop 之间形成了一个单向下行
 
 父组件中使用`<template v-slot:one>...</template>` ，子组件中使用<slot name="one"></slot>
 
-具名插槽简写方式 `<template #one></template>`
+具名插槽简写方式`<template #one></template>`
 
 ### 10. 作用域插槽的使用
 

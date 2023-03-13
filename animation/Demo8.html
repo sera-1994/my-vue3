@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://cdn.bootcdn.net/ajax/libs/vue/3.2.47/vue.global.js"></script>
+    <style>
+      .v-leave-from,
+      .v-enter-to {
+        opacity: 1;
+      }
+      .v-enter-from,
+      .v-leave-to {
+        opacity: 0;
+      }
+      .v-enter-active,
+      .v-leave-active {
+        transition: opacity 1s ease;
+      }
+    </style>
+    <title>元素切换动画</title>
+  </head>
+  <body>
+    <div id="app"></div>
+    <script>
+      const Skill = {
+        template: `<><>`,
+      };
+      const app = Vue.createApp({
+        data() {
+          return {
+            isShow: false,
+          };
+        },
+        methods: {
+          changeShow() {
+            this.isShow = !this.isShow;
+          },
+        },
+        template: `
+          <transition mode="out-in" appear>
+            <div v-if="isShow" style="color: green">Sera is learning how to program by Vue.</div>
+            <div v-else="isShow" style="color: red">controlling moving.</div>
+          </transition>
+          <button @click="changeShow">显示隐藏</button>
+        `,
+      });
+      app.mount("#app");
+    </script>
+  </body>
+</html>

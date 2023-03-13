@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://cdn.bootcdn.net/ajax/libs/vue/3.2.47/vue.global.js"></script>
+    <style>
+      .transition {
+        transition: 3s background-color ease;
+      }
+      .hotpink {
+        background-color: hotpink;
+      }
+      .green {
+        background-color: green;
+      }
+    </style>
+    <title>transition</title>
+  </head>
+  <body>
+    <div id="app"></div>
+    <script>
+      const app = Vue.createApp({
+        data() {
+          return {
+            demoStyle: {
+              transition: true,
+              hotpink: true,
+              green: false,
+            },
+          };
+        },
+        methods: {
+          changeColor() {
+            this.demoStyle.hotpink = !this.demoStyle.hotpink;
+            this.demoStyle.green = !this.demoStyle.green;
+          },
+        },
+        template: `
+        <div :class="demoStyle">过渡效果</div>
+        <button @click="changeColor">变色</button>
+        `,
+      });
+      app.mount("#app");
+    </script>
+  </body>
+</html>

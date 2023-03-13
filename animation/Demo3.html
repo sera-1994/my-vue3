@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://cdn.bootcdn.net/ajax/libs/vue/3.2.47/vue.global.js"></script>
+    <style>
+      @keyframes comeIn {
+        0% {
+          transform: translateX(-200px);
+        }
+        100% {
+          transform: translateX(0px);
+        }
+      }
+      @keyframes leaveOut {
+        0% {
+          transform: translateX(0px);
+        }
+        100% {
+          transform: translateX(-200px);
+        }
+      }
+      .v-enter-active {
+        animation: comeIn 3s;
+      }
+      .v-leave-active {
+        animation: leaveOut 3s;
+      }
+    </style>
+    <title>进入动画</title>
+  </head>
+  <body>
+    <div id="app"></div>
+    <script>
+      const app = Vue.createApp({
+        data() {
+          return {
+            isShow: false,
+          };
+        },
+        methods: {
+          changeShow() {
+            this.isShow = !this.isShow;
+          },
+        },
+        template: `
+        <transition>
+          <div v-if="isShow">Sera is learning program.</div>
+        </transition>
+        <button @click="changeShow">显示隐藏</button>
+        `,
+      });
+      app.mount("#app");
+    </script>
+  </body>
+</html>

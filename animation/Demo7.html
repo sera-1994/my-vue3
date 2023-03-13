@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://cdn.bootcdn.net/ajax/libs/vue/3.2.47/vue.global.js"></script>
+    <title>钩子函数制作动画</title>
+  </head>
+  <body>
+    <div id="app"></div>
+    <script>
+      const app = Vue.createApp({
+        data() {
+          return {
+            isShow: false,
+          };
+        },
+        methods: {
+          toggle() {
+            this.isShow = !this.isShow;
+          },
+          handleBeforeEnter(element) {
+            element.style.color = "pink";
+          },
+          handleEnter(element, done) {
+            const animation = setInterval(() => {
+              let color = element.style.color;
+              if (color === "pink") {
+                element.style.color = "yellow";
+              } else {
+                element.style.color = "pink";
+              }
+            }, 500);
+            setTimeout(() => {
+              clearInterval(animation);
+              done();
+            }, 1500);
+          },
+          handleEnterEnd() {
+            alert("Oh, look Sera! What a pretty girl!");
+          },
+        },
+        template: `<div>
+          <transition :css="false"
+            @before-enter="handleBeforeEnter"
+            @enter="handleEnter"
+            @after-enter="handleEnterEnd"
+            @before-leave="handleBeforeEnter"
+            @leave="handleEnter"
+            @after-leave="handleEnterEnd"
+          >
+            <h2 v-if="isShow">Sera is a pretty girl.</h2>
+          </transition>
+          <button @click="toggle">隐藏/展现</button>
+          </div>`,
+      });
+      app.mount("#app");
+    </script>
+  </body>
+</html>

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://cdn.bootcdn.net/ajax/libs/vue/3.2.47/vue.global.js"></script>
+    <style>
+      .v-enter-from,
+      .v-leave-to {
+        opacity: 0;
+      }
+      .v-enter-to,
+      .v-leave-from {
+        opacity: 1;
+      }
+      .v-enter-active,
+      .v-leave-active {
+        transition: 3s opacity ease-out;
+      }
+    </style>
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="app"></div>
+    <script>
+      const app = Vue.createApp({
+        data() {
+          return {
+            isShow: false,
+          };
+        },
+        methods: {
+          toggle() {
+            this.isShow = !this.isShow;
+          },
+        },
+        template: `
+          <div>
+            <transition>
+              <div v-if="isShow"><h2>Sera is pretty!</h2></div>
+            </transition>
+            <button @click="toggle">隐藏/显示</button>
+          </div>`,
+      });
+      app.mount("#app");
+    </script>
+  </body>
+</html>

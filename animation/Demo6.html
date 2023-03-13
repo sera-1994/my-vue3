@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://cdn.bootcdn.net/ajax/libs/vue/3.2.47/vue.global.js"></script>
+    <style>
+      @keyframes comeIn {
+        0% {
+          transform: translateX(-200px);
+        }
+        100% {
+          transform: translateX(0px);
+        }
+      }
+      @keyframes leaveOut {
+        0% {
+          transform: translateX(0px);
+        }
+        100% {
+          transform: translateX(-200px);
+        }
+      }
+      .v-enter-from,
+      .v-leave-to {
+        opacity: 0;
+      }
+      .v-enter-to,
+      .v-leave-from {
+        opacity: 1;
+      }
+      .v-enter-active {
+        animation: comeIn 7s;
+        transition: opacity 7s ease-out;
+      }
+      .v-leave-active {
+        animation: leaveOut 7s;
+        transition: opacity 7s ease-out;
+      }
+    </style>
+    <title>过渡和动画一起使用的技巧</title>
+  </head>
+  <body>
+    <div id="app"></div>
+    <script>
+      const app = Vue.createApp({
+        data() {
+          return {
+            isShow: false,
+          };
+        },
+        methods: {
+          toggle() {
+            this.isShow = !this.isShow;
+          },
+        },
+        template: `
+        <div>
+          <transition duration="1000">
+            <h2 v-if="isShow">Sera is a talent.</h2>
+          </transition>
+          <button @click="toggle">隐藏/显示</button>
+        </div>`,
+      });
+      app.mount("#app");
+    </script>
+  </body>
+</html>
